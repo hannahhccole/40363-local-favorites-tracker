@@ -14,6 +14,9 @@ const favoritesList = document.getElementById('favorites-list');
 const searchInput = document.getElementById('search-input');
 const categoryFilter = document.getElementById('category-filter');
 
+// Also grab the name input globally so we can attach validation listeners
+const nameInput = document.getElementById('name');
+
 console.log('Form:', form);
 console.log('Favorites list:', favoritesList);
 console.log('Search input:', searchInput);
@@ -237,7 +240,7 @@ function addFavorite(event) {
     displayFavorites();
 
     console.log('Favorite added successfully!');
-}
+} 
 
 // Connect event listeners
 form.addEventListener('submit', addFavorite);
@@ -251,6 +254,15 @@ const clearAllBtn = document.getElementById('clear-all-btn');
 if (clearAllBtn) {
     clearAllBtn.addEventListener('click', clearAllFavorites);
     console.log('Clear all button connected');
+
+// Check that required fields aren't empty
+nameInput.addEventListener('input', function() {
+    if (this.value.trim() === '') {
+        this.style.borderColor = 'red';
+    } else {
+        this.style.borderColor = '';
+    }
+});
 }
 
 // Load saved favorites from localStorage on startup
